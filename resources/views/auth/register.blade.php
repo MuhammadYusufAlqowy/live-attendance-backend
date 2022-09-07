@@ -44,9 +44,14 @@
                         type="email"
                         class="form-control"
                         name="email">
-                    <div class="invalid-feedback">
-                        test
-                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input id="phone"
+                        type="tel"
+                        class="form-control"
+                        name="phone">
                 </div>
 
                 <div class="form-group">
@@ -56,7 +61,7 @@
                         type="password"
                         class="form-control pwstrength"
                         data-indicator="pwindicator"
-                        name="password" autocomplete="new-password">
+                        name="password">
                     <div id="pwindicator"
                         class="pwindicator">
                         <div class="bar"></div>
