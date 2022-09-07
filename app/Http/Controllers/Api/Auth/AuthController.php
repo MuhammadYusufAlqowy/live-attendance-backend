@@ -43,7 +43,9 @@ class AuthController extends Controller
 
         $accessToken = Auth::user()->createToken($request->device_name)->plainTextToken;
         $user['token'] = $accessToken;
-        $user['photo'] = asset('/storage/profile/' .$user->photo);
+        if($user->photo){
+            $user['photo'] = asset('/storage/profile/' .$user->photo);
+        }
         return response()->json([
             'status' => true,
             'message' => 'success',
@@ -70,7 +72,9 @@ class AuthController extends Controller
 
         $accessToken = $user->createToken($request->device_name)->plainTextToken;
         $user['token'] = $accessToken;
-        $user['photo'] = asset('/storage/profile/' .$user->photo);
+        if($user->photo){
+            $user['photo'] = asset('/storage/profile/' .$user->photo);
+        }
         return response()->json([
             'status' => true,
             'message' => 'success',
