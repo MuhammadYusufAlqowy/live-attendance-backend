@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AttendanceController;
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Auth\PasswordController;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +36,16 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('attendance', [AttendanceController::class,'store']);
     Route::get('attendance/history', [AttendanceController::class,'history']);
+});
+
+Route::post('/error-401', function(){
+    return response()->json([
+        'status' => false,
+    'message' => 'Error 401 you dont have authorization',],401);
+});
+
+Route::post('/error-500', function(){
+    return response()->json([
+        'status' => false,
+    'message' => 'Internal server error!',],500);
 });
