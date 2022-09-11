@@ -17,23 +17,25 @@ class PasswordController extends Controller
     public function reset(Request $request)
     {
         $request->validate([
-            'password_old' => ['required', 'string', 'min:8'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'old_password' => ['required', 'string', 'min:8'],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        if (Hash::check($request->password_old, $request->user()->password)) {
+        if (Hash::check($request->old_password, $request->user()->password)) {
 
             $request->user()->update([
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->new_password)
             ]);
 
             return response()->json([
-                'message' => 'success',
+                'status' => true,
+                'message' => 'Password change has been success.',
             ], Response::HTTP_OK);
         }
 
         return response()->json([
-            'message' => 'Update password failed.',
+            'status' => false,
+            'message' => 'Update password failed, your password did not match.',
         ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 }
