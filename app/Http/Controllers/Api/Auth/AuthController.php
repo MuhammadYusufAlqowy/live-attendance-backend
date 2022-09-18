@@ -69,7 +69,7 @@ class AuthController extends Controller
                 'message' => 'The provided credentials are incorrect.',
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
-
+        $user->tokens()->delete();
         $accessToken = $user->createToken($request->device_name)->plainTextToken;
         $user['token'] = $accessToken;
         if($user->photo){
